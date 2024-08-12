@@ -17,6 +17,7 @@
     "devDependencies": {
         "@akrc/tsconfig": "^1.1.0",
         "@biomejs/biome": "^1.8.3",
+        "puppeteer": "^23.0.2",
         "tslib": "^2.6.3",
         "tsup": "^8.2.4",
         "typescript": "^5.5.4"

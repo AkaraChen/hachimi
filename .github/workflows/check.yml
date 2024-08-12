@@ -1,0 +1,50 @@
+name: Check
+on: 
+    schedule:
+        - cron: '0 0 * * *'
+    workflow_dispatch: 
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                node-version: latest
+            - uses: pnpm/action-setup@v4
+            - run: pnpm install
+            - run: pnpm check
+            - name: Commit files
+              id: commit
+              continue-on-error: true
+              run: |
+                git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                git config --local user.name "github-actions[bot]"
+                git commit -a -m "style: lint"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              if: ${{ steps.commit.outcome == 'success' }}
+              with:
+                branch: ${{ github.head_ref }}
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                node-version: latest
+            - uses: pnpm/action-setup@v4
+            - run: pnpm install
+            - run: pnpx tsx ./ci/check.ts
+            - name: Commit files
+              id: commit
+              continue-on-error: true
+              run: |
+                git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                git config --local user.name "github-actions[bot]"
+                git commit -a -m "style: lint"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              if: ${{ steps.commit.outcome == 'success' }}
+              with:
+                branch: ${{ github.head_ref }}
