@@ -1,0 +1,29 @@
+{
+    "name": "hachimi",
+    "version": "0.0.1",
+    "description": "哈基米，好胖好可爱",
+    "type": "module",
+    "scripts": {
+        "check": "biome check . --write",
+        "build": "tsup"
+    },
+    "keywords": ["hachimi"],
+    "author": "Akarachen",
+    "license": "ISC",
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "pnpm@9.6.0",
+    "devDependencies": {
+        "@akrc/tsconfig": "^1.1.0",
+        "@biomejs/biome": "^1.8.3",
+        "tslib": "^2.6.3",
+        "tsup": "^8.2.4",
+        "typescript": "^5.5.4"
+    },
+    "dependencies": {
+        "open": "^10.1.0"
+    },
+    "files": ["dist"],
+    "bin": "./dist/index.js"
+}
