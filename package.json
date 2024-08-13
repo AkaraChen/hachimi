@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "check": "biome check . --write",
-        "build": "tsup"
+        "build": "tsup",
+        "prepublish": "npm run build"
     },
     "keywords": ["hachimi"],
     "author": "Akarachen",
