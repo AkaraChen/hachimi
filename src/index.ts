@@ -1,4 +1,4 @@
-import source from '@/source.json';
+import source from '@/source.json' with { type: 'json' };
 import { concatUrl } from '@/util';
 import open from 'open';
 

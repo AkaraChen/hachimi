@@ -7,9 +7,7 @@
         "check": "biome check . --write",
         "build": "tsup"
     },
-    "keywords": [
-        "hachimi"
-    ],
+    "keywords": ["hachimi"],
     "author": "Akarachen",
     "license": "ISC",
     "publishConfig": {
@@ -17,20 +15,21 @@
     },
     "packageManager": "pnpm@9.6.0",
     "devDependencies": {
+        "@actions/github": "^6.0.0",
         "@akrc/tsconfig": "^1.1.0",
         "@biomejs/biome": "^1.8.3",
         "bumpp": "^9.5.1",
         "puppeteer": "^23.0.2",
+        "simple-git": "^3.25.0",
         "tslib": "^2.6.3",
         "tsup": "^8.2.4",
+        "tsx": "^4.17.0",
         "typescript": "^5.5.4",
         "zx": "^8.1.4"
     },
     "dependencies": {
         "open": "^10.1.0"
     },
-    "files": [
-        "dist"
-    ],
+    "files": ["dist", "src/source.json"],
     "bin": "./dist/index.js"
 }

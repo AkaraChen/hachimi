@@ -5,6 +5,7 @@ on:
     workflow_dispatch: 
 jobs:
     lint:
+        needs: [check, publish]
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -18,6 +19,7 @@ jobs:
               id: commit
               continue-on-error: true
               run: |
+                git pull
                 git config --local user.email "github-actions[bot]@users.noreply.github.com"
                 git config --local user.name "github-actions[bot]"
                 git commit -a -m "style: lint"
@@ -35,13 +37,47 @@ jobs:
                 node-version: latest
             - uses: pnpm/action-setup@v4
             - run: pnpm install
-            - run: pnpx tsx ./ci/check.ts
+            - run: pnpm tsx ./ci/check.ts
             - name: Commit files
               id: commit
               continue-on-error: true
               run: |
+                git pull
                 git config --local user.email "github-actions[bot]@users.noreply.github.com"
                 git config --local user.name "github-actions[bot]"
+                git commit -a -m "style: lint"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              if: ${{ steps.commit.outcome == 'success' }}
+              with:
+                branch: ${{ github.head_ref }}
+    publish:
+          runs-on: ubuntu-latest
+          steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+            - uses: actions/setup-node@v4
+              with:
+                node-version: latest
+            - uses: pnpm/action-setup@v4
+            - run: pnpm install
+            - run: pnpm build
+            - run: |
+                git pull
+                git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                git config --local user.name "github-actions[bot]"
+            - run: pnpm tsx ./ci/publish.ts
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: JS-DevTools/npm-publish@v3
+              with:
+                token: ${{ secrets.NPM_TOKEN }}
+            - name: Commit files
+              id: commit
+              continue-on-error: true
+              run: |
+                git pull
                 git commit -a -m "style: lint"
             - name: Push changes
               uses: ad-m/github-push-action@master
