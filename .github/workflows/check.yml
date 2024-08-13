@@ -73,14 +73,3 @@ jobs:
             - uses: JS-DevTools/npm-publish@v3
               with:
                 token: ${{ secrets.NPM_TOKEN }}
-            - name: Commit files
-              id: commit
-              continue-on-error: true
-              run: |
-                git pull
-                git commit -a -m "style: lint"
-            - name: Push changes
-              uses: ad-m/github-push-action@master
-              if: ${{ steps.commit.outcome == 'success' }}
-              with:
-                branch: ${{ github.head_ref }}
