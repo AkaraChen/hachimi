@@ -1,9 +1,11 @@
 import simpleGit from 'simple-git';
+import { createRequire } from 'node:module';
 import { $ } from 'zx';
 
 let haveUserGeneratedCommits = false;
 
 if (process.env.CI === 'true') {
+    const require = createRequire(import.meta.url);
     const github: typeof import('@actions/github') = require('@actions/github');
     const octokit = github.getOctokit(process.env.GITHUB_TOKEN!);
     const { data } = await octokit.rest.repos.listCommits({
