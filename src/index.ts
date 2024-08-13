@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import source from '@/source.json' with { type: 'json' };
 import { concatUrl } from '@/util';
 import open from 'open';
