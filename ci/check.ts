@@ -5,9 +5,9 @@ import puppeteer from 'puppeteer';
 import { PptrChecker } from './pptr';
 
 async function main() {
-    const checker = new PptrChecker(await puppeteer.launch());
     const deduped = Array.from(new Set(source));
     const result: string[] = [];
+    const checker = new PptrChecker(await puppeteer.launch());
     for (const bv of deduped) {
         if (await checker.check(bv)) {
             result.push(bv);
