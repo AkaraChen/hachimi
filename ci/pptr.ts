@@ -15,6 +15,8 @@ export class PptrChecker {
             return false;
         } catch (error) {
             return true;
+        } finally {
+            await page.close();
         }
     }
 

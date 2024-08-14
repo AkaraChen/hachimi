@@ -20,6 +20,7 @@
         "@akrc/tsconfig": "^1.1.0",
         "@biomejs/biome": "^1.8.3",
         "bumpp": "^9.5.1",
+        "p-all": "^5.0.0",
         "puppeteer": "^23.0.2",
         "tslib": "^2.6.3",
         "tsup": "^8.2.4",
