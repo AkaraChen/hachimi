@@ -9,7 +9,7 @@ export class PptrChecker {
         const page = await this.browser.newPage();
         await page.goto(url.href);
         try {
-            await page.waitForSelector('.rollback-btn', {
+            await page.waitForSelector('.rollback-btn,.go-home-from-404', {
                 timeout: 3000,
             });
             return false;
