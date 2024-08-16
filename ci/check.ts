@@ -1,6 +1,7 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import source from '@/source.json';
+import dayjs from 'dayjs';
 import pAll from 'p-all';
 import puppeteer from 'puppeteer';
 import { PptrChecker } from './pptr';
@@ -8,6 +9,7 @@ import { PptrChecker } from './pptr';
 const deduped = Array.from(new Set(source));
 let result: string[] = [];
 const checker = new PptrChecker(await puppeteer.launch());
+const unavailabled: string[] = [];
 await pAll(
     deduped.map((bv, idx) => {
         return async () => {
@@ -15,6 +17,7 @@ await pAll(
                 result[idx] = bv;
             } else {
                 console.log(`视频 ${bv} 已下架`);
+                unavailabled.push(bv);
             }
         };
     }),
@@ -25,4 +28,12 @@ result = result.filter(Boolean);
 await fsp.writeFile(
     path.resolve(import.meta.dirname, '../src/source.json'),
     JSON.stringify(result, null, 4),
+);
+await fsp.appendFile(
+    path.resolve(import.meta.dirname, '../blocklist.md'),
+    `
+# ${dayjs().format('YYYY-MM-DD')}
+
+${unavailabled.map((bv) => `- ${bv}`).join('\n')}
+`,
 );
