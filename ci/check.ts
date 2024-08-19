@@ -2,6 +2,7 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 import source from '@/source.json';
 import dayjs from 'dayjs';
+import { dequal } from 'dequal';
 import pAll from 'p-all';
 import puppeteer from 'puppeteer';
 import { PptrChecker } from './pptr';
@@ -26,7 +27,7 @@ await pAll(
 await checker.dispose();
 result = result.filter(Boolean);
 
-if (result !== source) {
+if (dequal(result, source)) {
     await fsp.writeFile(
         path.resolve(import.meta.dirname, '../src/source.json'),
         JSON.stringify(result, null, 4),

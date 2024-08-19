@@ -30,6 +30,7 @@
         "zx": "^8.1.4"
     },
     "dependencies": {
+        "dequal": "^2.0.3",
         "open": "^10.1.0"
     },
     "files": ["dist", "src/source.json"],

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      dequal:
+        specifier: ^2.0.3
+        version: 2.0.3
       open:
         specifier: ^10.1.0
         version: 10.1.0
@@ -693,6 +696,10 @@ packages:
 
   deprecation@2.3.1:
     resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}
+
+  dequal@2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
 
   destr@2.0.3:
     resolution: {integrity: sha512-2N3BOUU4gYMpTP24s5rF5iP7BDr7uNTCs4ozw3kf/eKfvWSIu93GEBi5m427YoyJoeOzQ5smuu4nNAPGb8idSQ==}
@@ -2054,6 +2061,8 @@ snapshots:
       esprima: 4.0.1
 
   deprecation@2.3.1: {}
+
+  dequal@2.0.3: {}
 
   destr@2.0.3: {}
 
