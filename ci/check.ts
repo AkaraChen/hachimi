@@ -25,17 +25,21 @@ await pAll(
 );
 await checker.dispose();
 result = result.filter(Boolean);
-await fsp.writeFile(
-    path.resolve(import.meta.dirname, '../src/source.json'),
-    JSON.stringify(result, null, 4),
-);
-if (unavailabled.length > 0) {
-    await fsp.appendFile(
-        path.resolve(import.meta.dirname, '../blocklist.md'),
-        `
+
+if (result !== source) {
+    await fsp.writeFile(
+        path.resolve(import.meta.dirname, '../src/source.json'),
+        JSON.stringify(result, null, 4),
+    );
+
+    if (unavailabled.length > 0) {
+        await fsp.appendFile(
+            path.resolve(import.meta.dirname, '../blocklist.md'),
+            `
 # ${dayjs().format('YYYY-MM-DD')}
 
 ${unavailabled.map((bv) => `- ${bv}`).join('\n')}
 `,
-    );
+        );
+    }
 }
