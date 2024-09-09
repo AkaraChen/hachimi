@@ -30,7 +30,7 @@ result = result.filter(Boolean);
 if (dequal(result, source)) {
     await fsp.writeFile(
         path.resolve(import.meta.dirname, '../src/source.json'),
-        JSON.stringify(result, null, 4),
+        JSON.stringify(result, null, 4) + '\n',
     );
 
     if (unavailabled.length > 0) {
