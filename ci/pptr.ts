@@ -12,11 +12,11 @@ export class PptrChecker {
             await page.waitForSelector('.rollback-btn,.go-home-from-404', {
                 timeout: 3000,
             });
+            await page.close();
             return false;
         } catch (error) {
-            return true;
-        } finally {
             await page.close();
+            return true;
         }
     }
 
